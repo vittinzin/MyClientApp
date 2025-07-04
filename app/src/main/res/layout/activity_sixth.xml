@@ -5,32 +5,58 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ThirdActivity">
+    tools:context=".view.SixthActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="58dp">
+
+
+    <TextView
+        android:id="@+id/clientDateOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.424" />
+
+    <TextView
+        android:id="@+id/clientPriceOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.375" />
+
+    <TextView
+        android:id="@+id/clientPhoneOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.33" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:background="#BDBDBD"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/helloTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="4dp"
-        android:text=""
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.249" />
+        app:layout_constraintVertical_bias="0.001" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
@@ -70,70 +96,28 @@
         app:layout_constraintVertical_bias="0.976"
         app:srcCompat="@drawable/box_add_50dp_e3e3e3_fill0_wght400_grad0_opsz48" />
 
-    <ListView
-
-        android:id="@+id/orderList"
-        android:layout_width="202dp"
-        android:layout_height="100dp"
-        android:layout_margin="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.325"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.748" />
-
     <TextView
-        android:id="@+id/listOrdersPageTxt"
+        android:id="@+id/clientNameOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="📋 Your orders"
-        android:textSize="18sp"
+        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.254"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.558" />
-
-    <TextView
-        android:id="@+id/lastTxt2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="⏱️ Last orders"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.251"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.626" />
-
-    <TextView
-        android:id="@+id/newOrderTxt"
-        android:layout_width="126dp"
-        android:layout_height="55dp"
-        android:text="Make a new order!"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.287" />
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="123dp"
-        android:layout_height="107dp"
+        android:id="@+id/arrowImg"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.113"
-        app:srcCompat="@drawable/logononame" />
+        app:layout_constraintVertical_bias="0.023"
+        app:srcCompat="@drawable/arrow_back_50dp_e3e3e3_fill0_wght400_grad0_opsz48" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

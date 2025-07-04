@@ -1,31 +1,39 @@
 package com.vitor.myclient.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.vitor.myclient.R;
+import com.vitor.myclient.controller.OrderController;
 import com.vitor.myclient.controller.OrderDbController;
 import com.vitor.myclient.model.Order;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 public class FifthActivity extends AppCompatActivity {
 
-    ImageView homePage, orderPage;
-    Order order;
-    Button orderBtn;
-    EditText clientName, clientPhone, orderValue, orderDate;
-    OrderDbController orderDbController;
+    private ImageView homePage, orderPage, arrowBack;
+    private Order order;
+    private Button orderBtn;
+    private EditText clientName, clientPhone, orderValue, orderDate;
+    private OrderDbController orderDbController;
+    private ArrayList<String> orderArrayList;
+    private ArrayAdapter<String> adapter;
+    private OrderController orderController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +44,26 @@ public class FifthActivity extends AppCompatActivity {
         homePage = findViewById(R.id.homePage5);
         orderPage = findViewById(R.id.orderPage5);
         orderBtn = findViewById(R.id.orderBtn);
+        arrowBack = findViewById(R.id.arrowImg);
         clientName = findViewById(R.id.clientName);
         clientPhone = findViewById(R.id.clientPhone);
         orderValue = findViewById(R.id.orderPrice);
         orderDate = findViewById(R.id.orderDate);
 
-       homePage.setOnClickListener(v -> {
-           Intent intent = new Intent(FifthActivity.this, ThirdActivity.class);
+        arrowBack.setOnClickListener(v -> {
+            Intent intent = new Intent(FifthActivity.this, FourthActivity.class);
             startActivity(intent);
-       });
+        });
+
+        homePage.setOnClickListener(v -> {
+            Intent intent = new Intent(FifthActivity.this, ThirdActivity.class);
+            startActivity(intent);
+        });
 
         orderPage.setOnClickListener(v -> {
             Intent intent = new Intent(FifthActivity.this, FourthActivity.class);
             startActivity(intent);
-       });
+        });
 
         orderBtn.setOnClickListener(v -> {
             String orderDateStr = orderDate.getText().toString();
@@ -71,7 +85,7 @@ public class FifthActivity extends AppCompatActivity {
             order = new Order(
                     clientName.getText().toString(),
                     clientPhone.getText().toString(),
-                    Double.valueOf(orderValue.getText().toString()),
+                    Float.valueOf(orderValue.getText().toString()),
                     parsedDate
             );
 
@@ -84,10 +98,13 @@ public class FifthActivity extends AppCompatActivity {
                     dateForDb
             );
 
-            clientName.setText("");
-            clientPhone.setText("");
-            orderValue.setText("");
-            orderDate.setText("");
+            orderController = new OrderController(this);
+            orderController.saveOrder(order);
+
+            orderArrayList = orderController.getOrderItens();
+            Intent intent = new Intent(FifthActivity.this, FourthActivity.class);
+            startActivity(intent);
         });
     }
+
 }
