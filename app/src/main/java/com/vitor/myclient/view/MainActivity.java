@@ -21,12 +21,12 @@ import com.vitor.myclient.model.Login;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView signUp;
-    EditText etEmail, etPassword;
-    Login login;
-    Button loginBtn;
-    RegisterDbController registerDBController;
-    RegisterController registerController;
+    private TextView signUp;
+    private EditText etEmail, etPassword;
+    private Login login;
+    private  Button loginBtn;
+    private RegisterDbController registerDBController;
+    private RegisterController registerController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

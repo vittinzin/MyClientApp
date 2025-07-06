@@ -17,11 +17,11 @@ import com.vitor.myclient.model.Register;
 public class SecondActivity extends AppCompatActivity {
 
 
-    Register register;
-    RegisterController registerController;
-    RegisterDbController rdb;
-    EditText etName, etPhone, etEmail, etPassword, etConfirm;
-    Button registerBtn;
+    private Register register;
+    private RegisterController registerController;
+    private RegisterDbController rdb;
+    private EditText etName, etPhone, etEmail, etPassword, etConfirm;
+    private Button registerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

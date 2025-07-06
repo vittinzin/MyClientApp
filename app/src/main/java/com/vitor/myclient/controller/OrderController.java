@@ -32,9 +32,8 @@ public class OrderController {
         editor.putStringSet(ITENS_KEY, novoSet);
         editor.putString("clientName", order.getClientName());
         editor.putString("clientPhone", order.getClientPhone());
-        editor.putFloat("orderPrice", order.getOrderPrice());
+        editor.putFloat("orderPrice", Float.valueOf(order.getOrderPrice()));
         editor.putString("orderDate", String.valueOf(order.getOrderDate()));
-        editor.apply();
         editor.apply();
     }
 

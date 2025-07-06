@@ -8,10 +8,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.vitor.myclient.R;
 import com.vitor.myclient.controller.OrderController;
@@ -24,11 +27,12 @@ import java.util.List;
 public class FourthActivity extends AppCompatActivity {
 
     private ImageView homePage;
-    private TextView makeOrder;
-    private ListView orderList;
-    private ArrayAdapter<String> adapter;
-    private OrderController orderController;
-    private ArrayList<String> orderArrayList;
+    private TextView makeOrder, noOrders;
+    private RecyclerView recyclerList;
+    private SearchView searchView;
+    private OrderDbController orderDbController;
+    private List<Order> orderList;
+    private Button editBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,23 +42,44 @@ public class FourthActivity extends AppCompatActivity {
 
         homePage = findViewById(R.id.homePage);
         makeOrder = findViewById(R.id.makeOrderPage);
-        orderList = findViewById(R.id.listTxt);
+        recyclerList = findViewById(R.id.listView);
+        searchView = findViewById(R.id.searchview);
+        editBtn = findViewById(R.id.editBtn);
+        orderDbController = new OrderDbController(this);
+        noOrders = findViewById(R.id.noItensTxt);
 
-        orderController = new OrderController(this);
+        orderList = orderDbController.getAllOrders();
+        OrderAdapter adapter = new OrderAdapter(orderList);
 
-        orderArrayList = orderController.getOrderItens();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, orderArrayList);
-        orderList.setAdapter(adapter);
+        recyclerList.setLayoutManager(new LinearLayoutManager(this));
+        recyclerList.setAdapter(adapter);
 
-        adapter.notifyDataSetChanged();
+        if (orderList.isEmpty()){
+            noOrders.setText("No orders yet!");
+        } else {
+            noOrders.setText("");
+        }
 
-        orderList.setOnItemClickListener((parent, view, position, id) -> {
-            String order = orderArrayList.get(position);
-            Intent intent = new Intent(FourthActivity.this, SixthActivity.class);
-            intent.putExtra("clientName", order);
-            startActivity(intent);
-            Log.d("ListClick", "Item clicado: " + order);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.filter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.filter(newText);
+                return true;
+            }
         });
+
+        if (!orderList.isEmpty()) {
+            editBtn.setOnClickListener(v -> {
+                Intent intent = new Intent(FourthActivity.this, SixthActivity.class);
+                startActivity(intent);
+            });
+        }
 
         homePage.setOnClickListener(v -> {
             Intent intent = new Intent(FourthActivity.this, ThirdActivity.class);

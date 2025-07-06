@@ -86,7 +86,7 @@ public class FifthActivity extends AppCompatActivity {
                     clientName.getText().toString(),
                     clientPhone.getText().toString(),
                     Float.valueOf(orderValue.getText().toString()),
-                    parsedDate
+                    orderDateStr
             );
 
             orderDbController = new OrderDbController(this);
@@ -97,9 +97,6 @@ public class FifthActivity extends AppCompatActivity {
                     String.valueOf(order.getOrderPrice()),
                     dateForDb
             );
-
-            orderController = new OrderController(this);
-            orderController.saveOrder(order);
 
             orderArrayList = orderController.getOrderItens();
             Intent intent = new Intent(FifthActivity.this, FourthActivity.class);

@@ -7,9 +7,9 @@ public class Order {
     private String clientName;
     private String clientPhone;
     private Float orderPrice;
-    private Date orderDate;
+    private String orderDate;
 
-    public Order(String clientName, String clientPhone, Float orderPrice, Date orderDate) {
+    public Order(String clientName, String clientPhone, Float orderPrice, String orderDate) {
         this.clientName = clientName;
         this.clientPhone = clientPhone;
         this.orderPrice = orderPrice;
@@ -20,31 +20,15 @@ public class Order {
         return clientName;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
     public String getClientPhone() {
         return clientPhone;
-    }
-
-    public void setClientPhone(String clientPhone) {
-        this.clientPhone = clientPhone;
     }
 
     public Float getOrderPrice() {
         return orderPrice;
     }
 
-    public void setOrderPrice(Float orderPrice) {
-        this.orderPrice = orderPrice;
-    }
-
-    public Date getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
     }
 }

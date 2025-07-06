@@ -12,19 +12,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.vitor.myclient.R;
 import com.vitor.myclient.controller.OrderController;
+import com.vitor.myclient.controller.OrderDbController;
 import com.vitor.myclient.controller.RegisterController;
+import com.vitor.myclient.model.Order;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ThirdActivity extends AppCompatActivity {
 
-    TextView helloTxt, newOrder, listOrdersPage;
-    ListView lastOrders;
-    ImageView orderPage;
+    private TextView helloTxt, newOrder, listOrdersPage, noOrders;
+    private ListView lastOrders;
+    private ImageView orderPage;
     private ArrayAdapter<String> adapter;
-    private OrderController orderController;
-    private ArrayList<String> orderArrayList;
+    private OrderDbController orderDbController;
+    private List<String> orderArrayList;
     private List<String> twoOrders;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,11 @@ public class ThirdActivity extends AppCompatActivity {
         lastOrders = findViewById(R.id.orderList);
         newOrder = findViewById(R.id.newOrderTxt);
         listOrdersPage = findViewById(R.id.listOrdersPageTxt);
+        noOrders = findViewById(R.id.noOrders);
+        orderDbController = new OrderDbController(this);
 
-        orderController = new OrderController(this);
+        orderArrayList = orderDbController.getNames();
 
-        orderArrayList = orderController.getOrderItens();
         twoOrders = orderArrayList.subList(0, Math.min(2, orderArrayList.size()));
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, twoOrders);
         lastOrders.setAdapter(adapter);
@@ -51,6 +54,12 @@ public class ThirdActivity extends AppCompatActivity {
         String name = registerController.getSavedName();
 
         helloTxt.setText("Hello, " + name + "!");
+
+        if (orderArrayList.isEmpty()){
+            noOrders.setText("No orders yet!");
+        } else {
+            noOrders.setText("");
+        }
 
         listOrdersPage.setOnClickListener(v ->{
             Intent intent = new Intent(ThirdActivity.this, FourthActivity.class);

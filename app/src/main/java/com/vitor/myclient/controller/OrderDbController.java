@@ -32,6 +32,63 @@ public class OrderDbController {
         data.put(OrderDb.CLIENT_PHONE, phone);
         data.put(OrderDb.VALUE, value);
         data.put(OrderDb.DATE, date);
+        db.insert(OrderDb.TABLE, null, data);
+
+    }
+    public List<Order> getAllOrders() {
+        List<Order> orderList = new ArrayList<>();
+        db = odb.getReadableDatabase();
+        Cursor cursor = db.query(OrderDb.TABLE, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(OrderDb.CLIENT_NAME));
+                String phone = cursor.getString(cursor.getColumnIndexOrThrow(OrderDb.CLIENT_PHONE));
+                float value = cursor.getFloat(cursor.getColumnIndexOrThrow(OrderDb.VALUE));
+                String date = cursor.getString(cursor.getColumnIndexOrThrow(OrderDb.DATE));
+
+                orderList.add(new Order(name, phone, value, date));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return orderList;
     }
 
+    public List<String> getNames() {
+        List<String> namesList = new ArrayList<>();
+        db = odb.getReadableDatabase();
+        Cursor cursor = db.query(OrderDb.TABLE, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(OrderDb.CLIENT_NAME));
+
+                namesList.add(name);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return namesList;
+    }
+
+    public void deleteOrder(int id) {
+        SQLiteDatabase db = odb.getWritableDatabase();
+        db.delete("orderData", "clientPhone = ?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+    public void editOrder(Order order) {
+        SQLiteDatabase db = odb.getWritableDatabase();
+        ContentValues data = new ContentValues();
+        data.put(OrderDb.CLIENT_NAME, order.getClientName());
+        data.put(OrderDb.CLIENT_PHONE, order.getClientPhone());
+        data.put(OrderDb.VALUE, order.getOrderPrice());
+        data.put(OrderDb.DATE, order.getOrderDate());
+
+        db.update("orderData", data, "clientPhone = ?", new String[]{String.valueOf(order.getClientPhone())});
+        db.close();
+    }
 }
