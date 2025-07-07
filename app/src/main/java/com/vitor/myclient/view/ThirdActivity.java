@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ThirdActivity extends AppCompatActivity {
 
-    private TextView helloTxt, newOrder, listOrdersPage, noOrders;
+    private TextView helloTxt, newOrder, listOrdersPage, noOrders, updateOrders;
     private ListView lastOrders;
     private ImageView orderPage;
     private ArrayAdapter<String> adapter;
@@ -40,6 +40,7 @@ public class ThirdActivity extends AppCompatActivity {
         newOrder = findViewById(R.id.newOrderTxt);
         listOrdersPage = findViewById(R.id.listOrdersPageTxt);
         noOrders = findViewById(R.id.noOrders);
+        updateOrders = findViewById(R.id.updateTxt);
         orderDbController = new OrderDbController(this);
 
         orderArrayList = orderDbController.getNames();
@@ -61,6 +62,10 @@ public class ThirdActivity extends AppCompatActivity {
             noOrders.setText("");
         }
 
+        updateOrders.setOnClickListener(v ->{
+            Intent intent = new Intent(ThirdActivity.this, SixthActivity.class);
+            startActivity(intent);
+        });
         listOrdersPage.setOnClickListener(v ->{
             Intent intent = new Intent(ThirdActivity.this, FourthActivity.class);
             startActivity(intent);

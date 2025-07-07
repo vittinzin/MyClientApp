@@ -25,7 +25,6 @@ public class SixthActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private SearchView searchView;
-    private Button editBtn, deleteBtn;
     private ImageView homePage, orderPage;
     private OrderDbController orderDbController;
     private List<Order> orderList;
@@ -47,8 +46,12 @@ public class SixthActivity extends AppCompatActivity {
         adapter = new EditOrderAdapter(orderList, new EditOrderAdapter.OnItemClickListener() {
             @Override
             public void onEditClick(Order order) {
-                // Pode abrir uma nova tela ou mostrar um dialog de edição
-                abrirDialogEdicao(order);
+                Intent intent = new Intent(SixthActivity.this, SeventhActivity.class);
+                intent.putExtra("name", order.getClientName());
+                intent.putExtra("phone", order.getClientPhone());
+                intent.putExtra("date", order.getOrderDate());
+                intent.putExtra("price", order.getOrderPrice());
+                startActivity(intent);
             }
 
             @Override
@@ -92,13 +95,6 @@ public class SixthActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
-
-    private void abrirDialogEdicao(Order order) {
-        // Implemente um diálogo com campos editáveis e botão "Salvar"
-        // Ao salvar, chame dbController.atualizarPedido(order)
-        // e depois: adapter.notifyDataSetChanged();
-    }
-
     private void refreshOrders() {
         orderList = orderDbController.getAllOrders();
         adapter.updateList(orderList);
